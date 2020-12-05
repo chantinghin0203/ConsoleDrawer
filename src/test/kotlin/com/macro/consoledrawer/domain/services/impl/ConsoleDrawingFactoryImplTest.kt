@@ -50,7 +50,7 @@ internal class ConsoleDrawingFactoryImplTest(@Autowired val drawingFactory: Draw
     @Test
     fun `test picking unknown`() {
         assertThrows(ToolNotFoundException::class.java) {
-            val picks = drawingFactory.picks(Command.UNKNOWN)
+            drawingFactory.picks(Command.UNKNOWN)
         }
     }
 }
