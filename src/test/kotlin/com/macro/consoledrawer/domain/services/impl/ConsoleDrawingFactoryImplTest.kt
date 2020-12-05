@@ -6,7 +6,9 @@ import com.macro.consoledrawer.domain.models.drawingtools.CanvasDrawer
 import com.macro.consoledrawer.domain.models.drawingtools.LineDrawer
 import com.macro.consoledrawer.domain.models.drawingtools.RectangleDrawer
 import com.macro.consoledrawer.domain.services.DrawingFactory
+import com.macro.consoledrawer.exception.ToolNotFoundException
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -42,5 +44,13 @@ internal class ConsoleDrawingFactoryImplTest(@Autowired val drawingFactory: Draw
         val picks = drawingFactory.picks(Command.R)
 
         assertThat(picks).isInstanceOf(RectangleDrawer::class.java)
+    }
+
+
+    @Test
+    fun `test picking unknown`() {
+        assertThrows(ToolNotFoundException::class.java) {
+            val picks = drawingFactory.picks(Command.UNKNOWN)
+        }
     }
 }
