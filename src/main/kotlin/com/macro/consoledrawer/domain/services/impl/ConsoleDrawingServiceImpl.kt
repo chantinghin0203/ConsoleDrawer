@@ -11,11 +11,11 @@ class ConsoleDrawingServiceImpl(
         private val drawingFactory: DrawingFactory
 ) : DrawingService {
 
-    override fun draw(userInput: String, canvas: Canvas): Canvas {
+    override fun draws(userInput: String, canvas: Canvas): Canvas {
         return drawingFactory.picks(Command.valueOf(userInput.first().toString()))
                 .run {
-                    val validate = validate(userInput, canvas)
-                    return@run draw(validate, canvas)
+                    val matchResult = validates(userInput, canvas)
+                    return@run draws(matchResult, canvas)
                 }
     }
 }

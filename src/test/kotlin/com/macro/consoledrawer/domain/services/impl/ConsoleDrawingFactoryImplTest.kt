@@ -1,10 +1,10 @@
 package com.macro.consoledrawer.domain.services.impl
 
 import com.macro.consoledrawer.domain.models.Command
-import com.macro.consoledrawer.domain.models.drawingtools.BucketFiller
-import com.macro.consoledrawer.domain.models.drawingtools.CanvasDrawer
-import com.macro.consoledrawer.domain.models.drawingtools.LineDrawer
-import com.macro.consoledrawer.domain.models.drawingtools.RectangleDrawer
+import com.macro.consoledrawer.domain.services.drawingtools.BucketFiller
+import com.macro.consoledrawer.domain.services.drawingtools.CanvasDrawer
+import com.macro.consoledrawer.domain.services.drawingtools.LineDrawer
+import com.macro.consoledrawer.domain.services.drawingtools.RectangleDrawer
 import com.macro.consoledrawer.domain.services.DrawingFactory
 import com.macro.consoledrawer.exception.ToolNotFoundException
 import org.assertj.core.api.Assertions.assertThat

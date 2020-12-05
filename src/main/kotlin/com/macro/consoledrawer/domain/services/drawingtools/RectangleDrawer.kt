@@ -1,4 +1,4 @@
-package com.macro.consoledrawer.domain.models.drawingtools
+package com.macro.consoledrawer.domain.services.drawingtools
 
 import com.macro.consoledrawer.domain.models.Command
 import com.macro.consoledrawer.domain.models.Canvas
@@ -11,7 +11,7 @@ import kotlin.math.max
 class RectangleDrawer : DrawingTool(Command.R) {
     override val regexMatcher = """[A-Z]\s(?<x1>\d+)\s(?<y1>\d+)\s(?<x2>\d+)\s(?<y2>\d+)""".toRegex()
 
-    override fun validate(userInput: String, canvas: Canvas): MatchResult {
+    override fun validates(userInput: String, canvas: Canvas): MatchResult {
         if (canvas.getHeight() == 0) throw CanvasNotCreatedException()
 
         return regexMatcher.matchEntire(userInput)
@@ -43,7 +43,7 @@ class RectangleDrawer : DrawingTool(Command.R) {
             throw WrongUserInputException("The height is out of range [x1=$x1] [x2=$x2] [canvas height = ${canvas.getHeight()}]")
     }
 
-    override fun draw(matchResult: MatchResult, canvas: Canvas) : Canvas {
+    override fun draws(matchResult: MatchResult, canvas: Canvas) : Canvas {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

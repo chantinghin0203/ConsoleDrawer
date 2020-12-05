@@ -1,4 +1,4 @@
-package com.macro.consoledrawer.domain.models.drawingtools
+package com.macro.consoledrawer.domain.services.drawingtools
 
 import com.macro.consoledrawer.domain.models.Command
 import com.macro.consoledrawer.domain.models.Canvas
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 class BucketFiller : DrawingTool(Command.B) {
     override val regexMatcher = """[A-Z]\s(?<x>\d+)\s(?<y>\d+)\s(?<c>[a-zA-Z])""".toRegex()
 
-    override fun validate(userInput: String, canvas: Canvas): MatchResult {
+    override fun validates(userInput: String, canvas: Canvas): MatchResult {
         if (canvas.getHeight() == 0) throw CanvasNotCreatedException()
 
 
@@ -31,7 +31,7 @@ class BucketFiller : DrawingTool(Command.B) {
                 ?: throw WrongUserInputException("Wrong input for creating canvas [$userInput]")
     }
 
-    override fun draw(matchResult: MatchResult, canvas: Canvas) : Canvas {
+    override fun draws(matchResult: MatchResult, canvas: Canvas) : Canvas {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

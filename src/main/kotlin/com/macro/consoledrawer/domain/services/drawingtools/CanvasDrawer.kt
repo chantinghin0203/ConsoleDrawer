@@ -1,4 +1,4 @@
-package com.macro.consoledrawer.domain.models.drawingtools
+package com.macro.consoledrawer.domain.services.drawingtools
 
 import com.macro.consoledrawer.domain.models.Command
 import com.macro.consoledrawer.domain.models.Canvas
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 class CanvasDrawer : DrawingTool(Command.C) {
     override val regexMatcher = """[A-Z]\s(?<w>\d+)\s(?<h>\d+)""".toRegex()
 
-    override fun validate(userInput: String, canvas: Canvas): MatchResult {
+    override fun validates(userInput: String, canvas: Canvas): MatchResult {
         return regexMatcher.matchEntire(userInput)
                 ?.apply {
                     val w = groups["w"]!!.value.toInt()
@@ -21,7 +21,7 @@ class CanvasDrawer : DrawingTool(Command.C) {
                 ?: throw WrongUserInputException("Wrong parameter for creating Canvas [$userInput]")
     }
 
-    override fun draw(matchResult: MatchResult, canvas: Canvas): Canvas {
+    override fun draws(matchResult: MatchResult, canvas: Canvas): Canvas {
         return canvas.copy(
                 grids = Array(
                         matchResult.groups["h"]!!.value.toInt()
