@@ -115,8 +115,6 @@ internal class RectangleDrawerTest(@Autowired val rectangleDrawer: RectangleDraw
 
         val newCanvas = rectangleDrawer.draws(matchResult, canvas)
 
-        newCanvas.display()
-
         for (i in expectedX1..expectedX2) {
             assertThat(canvas.getGrid(i, expectedY1)).isEqualTo('x')
             assertThat(canvas.getGrid(i, expectedY2)).isEqualTo('x')
