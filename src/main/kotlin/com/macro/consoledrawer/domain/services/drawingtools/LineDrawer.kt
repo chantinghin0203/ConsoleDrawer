@@ -11,7 +11,7 @@ class LineDrawer : DrawingTool(Command.L) {
     override val regexMatcher = """[A-Z]\s(?<x1>\d+)\s(?<y1>\d+)\s(?<x2>\d+)\s(?<y2>\d+)""".toRegex()
 
     override fun validates(userInput: String, canvas: Canvas): MatchResult {
-        if (canvas.getHeight() == 0 || canvas.getWeight() == 0) throw CanvasNotCreatedException()
+        if (canvas.getHeight() == 0) throw CanvasNotCreatedException()
 
         return regexMatcher.matchEntire(userInput)
                 ?.apply {

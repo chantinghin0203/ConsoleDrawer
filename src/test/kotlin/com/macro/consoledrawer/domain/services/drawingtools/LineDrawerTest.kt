@@ -1,6 +1,8 @@
 package com.macro.consoledrawer.domain.services.drawingtools
 
 import com.macro.consoledrawer.domain.models.Canvas
+import com.macro.consoledrawer.domain.models.Command
+import com.macro.consoledrawer.exception.CanvasNotCreatedException
 import com.macro.consoledrawer.exception.WrongUserInputException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertThrows
@@ -27,8 +29,8 @@ internal class LineDrawerTest(@Autowired val lineDrawer: LineDrawer) {
         private val expectedY2 = 10
 
         @Test
-        fun `validates`() {
-            val matchResult = lineDrawer.validates("L $expectedX1 $expectedY1 $expectedX2 $expectedY2", canvas)
+        fun validates() {
+            val matchResult = lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 $expectedX2 $expectedY2", canvas)
 
             assertThat(matchResult.groups["x1"]!!.value.toInt()).isEqualTo(expectedX1)
             assertThat(matchResult.groups["y1"]!!.value.toInt()).isEqualTo(expectedY1)
@@ -37,16 +39,25 @@ internal class LineDrawerTest(@Autowired val lineDrawer: LineDrawer) {
         }
 
         @Test
+        fun `validates with no canvas created`() {
+            val canvas = Canvas()
+
+            assertThrows(CanvasNotCreatedException::class.java) {
+                lineDrawer.validates("${Command.L} $expectedX1 $expectedY1", canvas)
+            }
+        }
+
+        @Test
         fun `validates with less inputs should throw WrongUserInputException`() {
             assertThrows(WrongUserInputException::class.java) {
-                lineDrawer.validates("L $expectedX1 $expectedY1", canvas)
+                lineDrawer.validates("${Command.L} $expectedX1 $expectedY1", canvas)
             }
         }
 
         @Test
         fun `validates with extra inputs should throw WrongUserInputException`() {
             assertThrows(WrongUserInputException::class.java) {
-                lineDrawer.validates("L $expectedX1 $expectedY1 $expectedX2 $expectedY2 6", canvas)
+                lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 $expectedX2 $expectedY2 6", canvas)
             }
         }
 
@@ -54,26 +65,26 @@ internal class LineDrawerTest(@Autowired val lineDrawer: LineDrawer) {
         @Test
         fun `validates with out of bound height should throw WrongUserInputException`() {
             assertThrows(WrongUserInputException::class.java) {
-                lineDrawer.validates("L $expectedX1 20 $expectedY1 $expectedY2", canvas)
+                lineDrawer.validates("${Command.L} $expectedX1 20 $expectedY1 $expectedY2", canvas)
             }
             assertThrows(WrongUserInputException::class.java) {
-                lineDrawer.validates("L $expectedX1 $expectedY1 $expectedY1 20", canvas)
+                lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 $expectedY1 20", canvas)
             }
         }
 
         @Test
         fun `validates with zero height should throw WrongUserInputException`() {
             assertThrows(NotImplementedError::class.java) {
-                lineDrawer.validates("L 0 $expectedY1 $expectedX1 $expectedY2", canvas)
+                lineDrawer.validates("${Command.L} 0 $expectedY1 $expectedX1 $expectedY2", canvas)
             }
             assertThrows(NotImplementedError::class.java) {
-                lineDrawer.validates("L $expectedX1 $expectedY1 0 $expectedY2", canvas)
+                lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 0 $expectedY2", canvas)
             }
         }
 
         @Test
         fun draws() {
-            val matchResult = lineDrawer.validates("L $expectedX1 $expectedY1 $expectedX2 $expectedY2", canvas)
+            val matchResult = lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 $expectedX2 $expectedY2", canvas)
 
             val newCanvas = lineDrawer.draws(matchResult, canvas)
 
@@ -92,8 +103,8 @@ internal class LineDrawerTest(@Autowired val lineDrawer: LineDrawer) {
         private val expectedY2 = 5
 
         @Test
-        fun `validates`() {
-            val matchResult = lineDrawer.validates("L $expectedX1 $expectedY1 $expectedX2 $expectedY2", canvas)
+        fun validates() {
+            val matchResult = lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 $expectedX2 $expectedY2", canvas)
 
             assertThat(matchResult.groups["x1"]!!.value.toInt()).isEqualTo(expectedX1)
             assertThat(matchResult.groups["y1"]!!.value.toInt()).isEqualTo(expectedY1)
@@ -104,41 +115,41 @@ internal class LineDrawerTest(@Autowired val lineDrawer: LineDrawer) {
         @Test
         fun `validates with less inputs should throw WrongUserInputException`() {
             assertThrows(WrongUserInputException::class.java) {
-                lineDrawer.validates("L $expectedX1 $expectedY1", canvas)
+                lineDrawer.validates("${Command.L} $expectedX1 $expectedY1", canvas)
             }
         }
 
         @Test
         fun `validates with extra inputs should throw WrongUserInputException`() {
             assertThrows(WrongUserInputException::class.java) {
-                lineDrawer.validates("L $expectedX1 $expectedY1 $expectedX2 $expectedY2 6", canvas)
+                lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 $expectedX2 $expectedY2 6", canvas)
             }
         }
 
         @Test
         fun `validates with out of bound width should throw WrongUserInputException`() {
             assertThrows(WrongUserInputException::class.java) {
-                lineDrawer.validates("L $expectedX1 $expectedY1 20 $expectedY2", canvas)
+                lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 20 $expectedY2", canvas)
             }
 
             assertThrows(WrongUserInputException::class.java) {
-                lineDrawer.validates("L 20 $expectedY1 $expectedX2 $expectedY2", canvas)
+                lineDrawer.validates("${Command.L} 20 $expectedY1 $expectedX2 $expectedY2", canvas)
             }
         }
 
         @Test
         fun `validates with zero width should throw WrongUserInputException`() {
             assertThrows(WrongUserInputException::class.java) {
-                lineDrawer.validates("L $expectedX1 $expectedY1 0 $expectedY2", canvas)
+                lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 0 $expectedY2", canvas)
             }
             assertThrows(WrongUserInputException::class.java) {
-                lineDrawer.validates("L 0 $expectedY1 $expectedX2 $expectedY2", canvas)
+                lineDrawer.validates("${Command.L} 0 $expectedY1 $expectedX2 $expectedY2", canvas)
             }
         }
 
         @Test
         fun draws() {
-            val matchResult = lineDrawer.validates("L $expectedX1 $expectedY1 $expectedX2 $expectedY2", canvas)
+            val matchResult = lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 $expectedX2 $expectedY2", canvas)
 
             val newCanvas = lineDrawer.draws(matchResult, canvas)
 
@@ -151,7 +162,7 @@ internal class LineDrawerTest(@Autowired val lineDrawer: LineDrawer) {
     @Test
     fun `validates with wrong inputs should throw WrongUserInputException`() {
         assertThrows(WrongUserInputException::class.java) {
-            lineDrawer.validates("L a b c d", canvas)
+            lineDrawer.validates("${Command.L} a b c d", canvas)
         }
     }
 
