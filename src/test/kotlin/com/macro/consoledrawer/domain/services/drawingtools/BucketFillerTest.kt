@@ -2,6 +2,7 @@ package com.macro.consoledrawer.domain.services.drawingtools
 
 import com.macro.consoledrawer.domain.models.Canvas
 import com.macro.consoledrawer.domain.models.Command
+import com.macro.consoledrawer.exception.CanvasNotCreatedException
 import com.macro.consoledrawer.exception.WrongUserInputException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertThrows
@@ -28,6 +29,13 @@ internal class BucketFillerTest(@Autowired val bucketFiller: BucketFiller) {
         assertThat(matchResult.groups["x"]!!.value.toInt()).isEqualTo(expectedX)
         assertThat(matchResult.groups["y"]!!.value.toInt()).isEqualTo(expectedY)
         assertThat(matchResult.groups["c"]!!.value).isEqualTo(expectedC)
+    }
+
+    @Test
+    fun `validates with canvas not created should throw CanvasNotCreatedException`() {
+        assertThrows(CanvasNotCreatedException::class.java) {
+            bucketFiller.validates("${Command.L} $expectedX $expectedY $expectedC", Canvas())
+        }
     }
 
     @Test

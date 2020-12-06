@@ -1,11 +1,10 @@
 package com.macro.consoledrawer.domain.services.drawingtools
 
-import com.macro.consoledrawer.domain.models.Command
 import com.macro.consoledrawer.domain.models.Canvas
+import com.macro.consoledrawer.domain.models.Command
 import com.macro.consoledrawer.exception.CanvasNotCreatedException
 import com.macro.consoledrawer.exception.WrongUserInputException
 import org.springframework.stereotype.Service
-import kotlin.math.max
 
 @Service
 class RectangleDrawer : DrawingTool(Command.R) {
@@ -17,33 +16,36 @@ class RectangleDrawer : DrawingTool(Command.R) {
         return regexMatcher.matchEntire(userInput)
                 ?.apply {
 
-                    val x1 = groups["x1"]!!.value.toInt()
-                    val x2 = groups["x1"]!!.value.toInt()
-                    val y1 = groups["y1"]!!.value.toInt()
-                    val y2 = groups["y2"]!!.value.toInt()
+                    val (x1, y1, x2, y2) = toCoordinate()
 
-                    checkHeight(x1, x2, canvas)
-                    checkWidth(y1, y2, canvas)
+                    if (!canvas.isInBound(x1, y1) || !canvas.isInBound(x2, y2))
+                        throw WrongUserInputException("The width is out of range [maxHeight=${canvas.getHeight()}] [maxWidth=${canvas.getWidth()}]")
+                    if (x1 == x2 && y1 == y2)
+                        throw WrongUserInputException("Cannot create a rectangle with two same points [x1=$x1] [y1=$y1] [x2=$x2] [y2=$y2]")
 
                 } ?: throw WrongUserInputException("Wrong parameters for drawing rectangle [$userInput]")
     }
 
-    private fun checkWidth(y1: Int, y2: Int, canvas: Canvas) {
-        if (y1 > 0 || y2 > 0)
-            throw WrongUserInputException("The width is out of range [y1=$y1] [y2=$y2]")
-        if (max(y1, y2) <= canvas.getWeight())
-            throw WrongUserInputException("The width is out of range [y1=$y1] [y2=$y2] [canvas height = ${canvas.getWeight()}]")
+    override fun draws(matchResult: MatchResult, canvas: Canvas): Canvas {
+        val (x1, y1, x2, y2) = matchResult.toCoordinate()
+
+        for (i in if (x2 > x1) x1..x2 else y2..y1) {
+            canvas.setGrid(i, y1)
+            canvas.setGrid(i, y2)
+        }
+
+        for (j in if (y2 > y1) y1..y2 else y2..y1) {
+            canvas.setGrid(x1, j)
+            canvas.setGrid(x2, j)
+        }
+
+        return canvas
     }
 
-    private fun checkHeight(x1: Int, x2: Int, canvas: Canvas) {
-        // check height
-        if (x1 > 0 || x2 > 0)
-            throw WrongUserInputException("The height is out of range [x1=$x1] [x2=$x2] ")
-        if (max(x1, x2) <= canvas.getHeight())
-            throw WrongUserInputException("The height is out of range [x1=$x1] [x2=$x2] [canvas height = ${canvas.getHeight()}]")
-    }
-
-    override fun draws(matchResult: MatchResult, canvas: Canvas) : Canvas {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    private fun MatchResult.toCoordinate() = listOf(
+            groups["x1"]!!.value.toInt(),
+            groups["y1"]!!.value.toInt(),
+            groups["x2"]!!.value.toInt(),
+            groups["y2"]!!.value.toInt()
+    )
 }

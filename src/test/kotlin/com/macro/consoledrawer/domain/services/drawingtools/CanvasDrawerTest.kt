@@ -2,7 +2,6 @@ package com.macro.consoledrawer.domain.services.drawingtools
 
 import com.macro.consoledrawer.domain.models.Canvas
 import com.macro.consoledrawer.domain.models.Command
-import com.macro.consoledrawer.exception.CanvasNotCreatedException
 import com.macro.consoledrawer.exception.WrongUserInputException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertThrows
@@ -14,11 +13,21 @@ import org.springframework.test.context.ActiveProfiles
 @SpringBootTest
 @ActiveProfiles("test")
 internal class CanvasDrawerTest(@Autowired val canvasDrawer: CanvasDrawer) {
-    private val expectedW = 5
+    private val expectedW = 10
     private val expectedH = 5
 
     private val canvas: Canvas = Canvas(
-            grids = Array(10) { CharArray(10) { ' ' } }
+            grids = Array(5) { CharArray(5) { ' ' } }
+    )
+
+    private val expectedCanvas = Canvas(
+            grids = arrayOf(
+                    charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                    charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                    charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                    charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                    charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ')
+            )
     )
 
     @Test
@@ -30,33 +39,31 @@ internal class CanvasDrawerTest(@Autowired val canvasDrawer: CanvasDrawer) {
     }
 
     @Test
-    fun `validates with no canvas created should throw CanvasNotCreatedException`() {
-        val canvas = Canvas()
+    fun `validates with no canvas`() {
+        val matchResult = canvasDrawer.validates("${Command.C} $expectedW $expectedH", Canvas())
 
-        assertThrows(CanvasNotCreatedException::class.java) {
-            canvasDrawer.validates("${Command.C} $expectedW $expectedH", canvas)
-        }
+        assertThat(matchResult.groups["w"]!!.value.toInt()).isEqualTo(expectedW)
+        assertThat(matchResult.groups["h"]!!.value.toInt()).isEqualTo(expectedH)
     }
 
 
     @Test
     fun `validates with zero height or weight should throw WrongUserInputException`() {
         assertThrows(WrongUserInputException::class.java) {
-            canvasDrawer.validates("${Command.C} 0 $expectedH", canvas)
+            canvasDrawer.validates("${Command.C} 0 $expectedH", Canvas())
         }
 
         assertThrows(WrongUserInputException::class.java) {
-            canvasDrawer.validates("${Command.C} $expectedW 0", canvas)
+            canvasDrawer.validates("${Command.C} $expectedW 0", Canvas())
         }
     }
 
 
     @Test
     fun draws() {
-        val matchResult = canvasDrawer.validates("${Command.C} $expectedW $expectedH", canvas)
-        val newCanvas = canvasDrawer.draws(matchResult, canvas)
+        val matchResult = canvasDrawer.validates("${Command.C} $expectedW $expectedH", Canvas())
+        val actualCanvas = canvasDrawer.draws(matchResult, Canvas())
 
-        assertThat(newCanvas.getHeight()).isEqualTo(expectedH)
-        assertThat(newCanvas.getWidth()).isEqualTo(expectedW)
+        assertThat(actualCanvas).isEqualTo(expectedCanvas)
     }
 }

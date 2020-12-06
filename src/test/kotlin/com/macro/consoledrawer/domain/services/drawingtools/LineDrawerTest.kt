@@ -28,6 +28,21 @@ internal class LineDrawerTest(@Autowired val lineDrawer: LineDrawer) {
         private val expectedX2 = 5
         private val expectedY2 = 10
 
+        private val expectedCanvas = Canvas(
+                grids = arrayOf(
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ')
+                )
+        )
+
         @Test
         fun validates() {
             val matchResult = lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 $expectedX2 $expectedY2", canvas)
@@ -85,23 +100,18 @@ internal class LineDrawerTest(@Autowired val lineDrawer: LineDrawer) {
         @Test
         fun draws() {
             val matchResult = lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 $expectedX2 $expectedY2", canvas)
+            val actualCanvas = lineDrawer.draws(matchResult, canvas)
 
-            val newCanvas = lineDrawer.draws(matchResult, canvas)
-
-            for (i in expectedY1..expectedY2) {
-                assertThat(newCanvas.getGrid(5, i)).isEqualTo('x')
-            }
+            assertThat(actualCanvas).isEqualTo(expectedCanvas)
         }
 
         @Test
         fun `draws with y1 is greater than y2`() {
             val matchResult = lineDrawer.validates("${Command.L} $expectedX1 $expectedY2 $expectedX2 $expectedY1", canvas)
+            val actualCanvas = lineDrawer.draws(matchResult, canvas)
 
-            val newCanvas = lineDrawer.draws(matchResult, canvas)
+            assertThat(actualCanvas).isEqualTo(expectedCanvas)
 
-            for (i in expectedY1..expectedY2) {
-                assertThat(newCanvas.getGrid(5, i)).isEqualTo('x')
-            }
         }
     }
 
@@ -112,6 +122,21 @@ internal class LineDrawerTest(@Autowired val lineDrawer: LineDrawer) {
         private val expectedY1 = 5
         private val expectedX2 = 10
         private val expectedY2 = 5
+
+        private val expectedCanvas = Canvas(
+                grids = arrayOf(
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', 'x', 'x', 'x', 'x', 'x'),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ')
+                )
+        )
 
         @Test
         fun validates() {
@@ -161,23 +186,17 @@ internal class LineDrawerTest(@Autowired val lineDrawer: LineDrawer) {
         @Test
         fun draws() {
             val matchResult = lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 $expectedX2 $expectedY2", canvas)
+            val actualCanvas = lineDrawer.draws(matchResult, canvas)
 
-            val newCanvas = lineDrawer.draws(matchResult, canvas)
-
-            for (i in expectedX1..expectedX2) {
-                assertThat(newCanvas.getGrid(i, 5)).isEqualTo('x')
-            }
+            assertThat(actualCanvas).isEqualTo(expectedCanvas)
         }
 
         @Test
         fun `draws with x1 is greater than x2`() {
             val matchResult = lineDrawer.validates("${Command.L} $expectedX2 $expectedY1 $expectedX1 $expectedY2", canvas)
+            val actualCanvas = lineDrawer.draws(matchResult, canvas)
 
-            val newCanvas = lineDrawer.draws(matchResult, canvas)
-
-            for (i in expectedX1..expectedX2) {
-                assertThat(newCanvas.getGrid(i, 5)).isEqualTo('x')
-            }
+            assertThat(actualCanvas).isEqualTo(expectedCanvas)
         }
     }
 

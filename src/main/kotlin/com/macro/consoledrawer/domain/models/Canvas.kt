@@ -1,7 +1,7 @@
 package com.macro.consoledrawer.domain.models
 
 data class Canvas(
-        val grids: Array<CharArray> = Array(0) { CharArray(0) { ' ' } }
+        val grids: Array<CharArray> = emptyArray()
 
 
 ) {
@@ -18,12 +18,17 @@ data class Canvas(
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
         other as Canvas
+        if (this.getWidth() != other.getWidth() || this.getHeight() != other.getHeight()) return false
 
-        if (!grids.contentDeepEquals(other.grids)) return false
+        for (i in 1..this.getWidth()) {
+            for (j in 1..this.getHeight()) {
+                if (this.getGrid(i, j) != other.getGrid(i, j))
+                    return false
+            }
+        }
 
         return true
     }
