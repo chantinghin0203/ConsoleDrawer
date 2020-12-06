@@ -20,7 +20,7 @@ class CanvasDrawer : DrawingTool(Command.C) {
                     val w = groups["w"]!!.value.toInt()
                     val h = groups["h"]!!.value.toInt()
 
-                    if (w <= 0 || h <= 0)
+                    if (!canvas.isInBound(w, h))
                         throw WrongUserInputException("Width and Height must be positive number [$userInput]")
                 }
                 ?: throw WrongUserInputException("Wrong parameter for creating Canvas [$userInput]")

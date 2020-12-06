@@ -57,6 +57,6 @@ internal class CanvasDrawerTest(@Autowired val canvasDrawer: CanvasDrawer) {
         val newCanvas = canvasDrawer.draws(matchResult, canvas)
 
         assertThat(newCanvas.getHeight()).isEqualTo(expectedH)
-        assertThat(newCanvas.getWeight()).isEqualTo(expectedW)
+        assertThat(newCanvas.getWidth()).isEqualTo(expectedW)
     }
 }

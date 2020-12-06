@@ -18,15 +18,14 @@ class LineDrawer : DrawingTool(Command.L) {
                     val (x1, y1, x2, y2) = toCoordinate()
 
                     if (x1 != x2 && y1 != y2) TODO("Diagonal line is not supported")
-                    if (x1 > canvas.getWeight() || x1 <= 0 || x2 > canvas.getWeight() || x2 <= 0) throw WrongUserInputException("Height is out of bound")
-                    if (y1 > canvas.getHeight() || y1 <= 0 || y2 > canvas.getHeight() || y2 <= 0) throw WrongUserInputException("Height is out of bound")
-                    if (x1 == x2 && y1 == y2) throw WrongUserInputException("Cannot create a line with two same points (x1, y1) and (x2, y2)")
+                    if (!canvas.isInBound(x1, y1) || !canvas.isInBound(x2, y2))
+                        throw WrongUserInputException("Out of bound [maxHeight = ${canvas.getHeight()}] [maxWidth = ${canvas.getWidth()}]")
+                    if (x1 == x2 && y1 == y2)
+                        throw WrongUserInputException("Cannot create a line with two same points (x1, y1) and (x2, y2)")
                 }
                 ?: throw WrongUserInputException("Wrong input for drawing a line [$userInput]")
 
     }
-
-    private fun MatchResult.toCoordinate() = listOf(groups["x1"]!!.value.toInt(), groups["y1"]!!.value.toInt(), groups["x2"]!!.value.toInt(), groups["y2"]!!.value.toInt())
 
     override fun draws(matchResult: MatchResult, canvas: Canvas): Canvas {
         val (x1, y1, x2, y2) = matchResult.toCoordinate()
@@ -36,7 +35,7 @@ class LineDrawer : DrawingTool(Command.L) {
                 canvas.setGrid(x1, j)
             }
             y1 == y2 -> for (i in if (x2 > x1) x1..x2 else x2..x1) {
-                canvas.setGrid(x1, i)
+                canvas.setGrid(i, y1)
             }
             else -> {
                 // TODO("Diagonal line is not supported")
@@ -45,4 +44,11 @@ class LineDrawer : DrawingTool(Command.L) {
 
         return canvas
     }
+
+    private fun MatchResult.toCoordinate() = listOf(
+            groups["x1"]!!.value.toInt(),
+            groups["y1"]!!.value.toInt(),
+            groups["x2"]!!.value.toInt(),
+            groups["y2"]!!.value.toInt()
+    )
 }

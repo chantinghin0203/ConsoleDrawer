@@ -5,14 +5,16 @@ data class Canvas(
 
 
 ) {
+    fun isInBound(x: Int, y: Int) = y > 0 && y <= getHeight() && x > 0 && x <= getWidth()
+
     fun getHeight(): Int = grids.size
 
-    fun getWeight(): Int = this.grids.first().size
+    fun getWidth(): Int = this.grids.first().size
 
-    fun getGrid(height: Int, weight: Int): Char = grids[height - 1][weight - 1]
+    fun getGrid(width: Int, height: Int): Char = grids[height - 1][width - 1]
 
-    fun setGrid(weight: Int, height: Int, notation: Char = 'x') {
-        grids[height - 1][weight - 1] = notation
+    fun setGrid(width: Int, height: Int, notation: Char = 'x') {
+        grids[height - 1][width - 1] = notation
     }
 
     override fun equals(other: Any?): Boolean {
@@ -31,11 +33,11 @@ data class Canvas(
     }
 
     fun display() {
-        println("---".repeat(getWeight()))
+        println("---".repeat(getWidth()))
 
         for (row in grids) {
             println("|${row.joinToString("  ")}|")
         }
-        println("---".repeat(getWeight()))
+        println("---".repeat(getWidth()))
     }
 }
