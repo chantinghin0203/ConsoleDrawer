@@ -32,7 +32,7 @@ In a nutshell, the program should work as follows:
 |B x y c|Should fill the entire area connected to (x,y) with "colour" c. The behavior of this is the same as that of the "bucket fill" tool in paint programs
 |Q|Should quit the program
 
-##Validations and rejections:
+## Validations and rejections:
 User must create canvas before creating Canvas must provide positive numbers
 
 All points with out of bound coordinate will be rejected
