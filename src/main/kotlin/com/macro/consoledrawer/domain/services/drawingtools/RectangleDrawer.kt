@@ -8,7 +8,14 @@ import org.springframework.stereotype.Service
 
 @Service
 class RectangleDrawer : DrawingTool(Command.R) {
-    override val regexMatcher = """[A-Z]\s(?<x1>\d+)\s(?<y1>\d+)\s(?<x2>\d+)\s(?<y2>\d+)""".toRegex()
+    companion object {
+        private const val TAG_X1 = "x1"
+        private const val TAG_Y1 = "y1"
+        private const val TAG_X2 = "x2"
+        private const val TAG_Y2 = "y2"
+    }
+
+    override val regexMatcher = """[A-Z]\s(?<$TAG_X1>\d+)\s(?<$TAG_Y1>\d+)\s(?<$TAG_X2>\d+)\s(?<$TAG_Y2>\d+)""".toRegex()
 
     override fun validates(userInput: String, canvas: Canvas): MatchResult {
         if (canvas.getHeight() == 0) throw CanvasNotCreatedException()
@@ -43,9 +50,9 @@ class RectangleDrawer : DrawingTool(Command.R) {
     }
 
     private fun MatchResult.toCoordinate() = listOf(
-            groups["x1"]!!.value.toInt(),
-            groups["y1"]!!.value.toInt(),
-            groups["x2"]!!.value.toInt(),
-            groups["y2"]!!.value.toInt()
+            groups[TAG_X1]!!.value.toInt(),
+            groups[TAG_Y1]!!.value.toInt(),
+            groups[TAG_X2]!!.value.toInt(),
+            groups[TAG_Y2]!!.value.toInt()
     )
 }

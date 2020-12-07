@@ -10,10 +10,13 @@ import java.util.*
 @Service
 class BucketFiller : DrawingTool(Command.B) {
     companion object {
-        const val EMPTY_GRID = ' '
+        private const val EMPTY_GRID = ' '
+        private const val TAG_X = "x"
+        private const val TAG_Y = "y"
+        private const val TAG_C = "c"
     }
 
-    override val regexMatcher = """[A-Z]\s(?<x>\d+)\s(?<y>\d+)\s(?<c>[a-zA-Z])""".toRegex()
+    override val regexMatcher = """[A-Z]\s(?<$TAG_X>\d+)\s(?<$TAG_Y>\d+)\s(?<$TAG_C>[a-zA-Z])""".toRegex()
 
     override fun validates(userInput: String, canvas: Canvas): MatchResult {
         if (canvas.getHeight() == 0) throw CanvasNotCreatedException()
@@ -56,6 +59,6 @@ class BucketFiller : DrawingTool(Command.B) {
         return canvas
     }
 
-    private fun MatchResult.toCoordinatePair() = Pair(groups["x"]!!.value.toInt(), groups["y"]!!.value.toInt())
-    private fun MatchResult.toColor() = groups["c"]!!.value.first()
+    private fun MatchResult.toCoordinatePair() = Pair(groups[TAG_X]!!.value.toInt(), groups[TAG_Y]!!.value.toInt())
+    private fun MatchResult.toColor() = groups[TAG_C]!!.value.first()
 }

@@ -7,13 +7,18 @@ import org.springframework.stereotype.Service
 
 @Service
 class CanvasDrawer : DrawingTool(Command.C) {
-    override val regexMatcher = """[A-Z]\s(?<w>\d+)\s(?<h>\d+)""".toRegex()
+    companion object {
+        private const val TAG_W = "w"
+        private const val TAG_H = "h"
+    }
+
+    override val regexMatcher = """[A-Z]\s(?<$TAG_W>\d+)\s(?<$TAG_H>\d+)""".toRegex()
 
     override fun validates(userInput: String, canvas: Canvas): MatchResult {
         return regexMatcher.matchEntire(userInput)
                 ?.apply {
-                    val w = groups["w"]!!.value.toInt()
-                    val h = groups["h"]!!.value.toInt()
+                    val w = groups[TAG_W]!!.value.toInt()
+                    val h = groups[TAG_H]!!.value.toInt()
 
                     if (w <= 0 || h <= 0)
                         throw WrongUserInputException("Width and Height must be positive number [$userInput]")
@@ -24,9 +29,9 @@ class CanvasDrawer : DrawingTool(Command.C) {
     override fun draws(matchResult: MatchResult, canvas: Canvas): Canvas {
         return canvas.copy(
                 grids = Array(
-                        matchResult.groups["h"]!!.value.toInt()
+                        matchResult.groups[TAG_H]!!.value.toInt()
                 ) {
-                    CharArray(matchResult.groups["w"]!!.value.toInt()) { ' '}
+                    CharArray(matchResult.groups[TAG_W]!!.value.toInt()) { ' ' }
                 }
         )
     }

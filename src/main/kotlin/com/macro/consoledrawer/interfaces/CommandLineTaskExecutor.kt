@@ -13,12 +13,17 @@ import org.springframework.util.StringUtils
 class CommandLineTaskExecutor(val drawingService: DrawingService) : CommandLineRunner {
     private val logger = LoggerFactory.getLogger(javaClass)
     private var canvas: Canvas = Canvas()
+
+    companion object {
+        private const val EXIT = "Q"
+    }
+
     override fun run(vararg args: String?) {
         do {
             println("enter command: ")
             val userInput = readLine()
             println()
-            if (userInput == null || StringUtils.isEmpty(userInput) || userInput == "Q") {
+            if (userInput == null || StringUtils.isEmpty(userInput) || userInput == EXIT) {
                 continue
             } else {
                 runCatching {
@@ -26,7 +31,7 @@ class CommandLineTaskExecutor(val drawingService: DrawingService) : CommandLineR
                     canvas.display()
                 }.onFailure { logger.error(it.localizedMessage, it) }
             }
-        } while (userInput != "Q")
+        } while (userInput != EXIT)
     }
 
     fun getCanvas() = canvas
