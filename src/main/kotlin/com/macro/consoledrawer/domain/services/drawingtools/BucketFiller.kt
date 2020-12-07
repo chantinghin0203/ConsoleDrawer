@@ -10,7 +10,6 @@ import java.util.*
 @Service
 class BucketFiller : DrawingTool(Command.B) {
     companion object {
-        private const val EMPTY_GRID = ' '
         private const val TAG_X = "x"
         private const val TAG_Y = "y"
         private const val TAG_C = "c"
@@ -24,7 +23,11 @@ class BucketFiller : DrawingTool(Command.B) {
         return regexMatcher.matchEntire(userInput)
                 ?.apply {
                     val (x, y) = toCoordinatePair()
+                    val color = toColor()
 
+                    if (color == 'x') {
+                        throw WrongUserInputException("Cannot fill color x. It is reserved for drawing")
+                    }
                     if (y > canvas.getHeight() || y <= 0)
                         throw WrongUserInputException("The y is out of range [y=$y]")
                     if (x > canvas.getWidth() || x <= 0)
@@ -39,14 +42,16 @@ class BucketFiller : DrawingTool(Command.B) {
         val color = matchResult.toColor()
 
         val stack = Stack<Pair<Int, Int>>()
-        stack.push(matchResult.toCoordinatePair())
+        val initialCoordinate = matchResult.toCoordinatePair()
+        val initialColor = canvas.getGrid(initialCoordinate.first, initialCoordinate.second)
 
+        stack.push(initialCoordinate)
         while (stack.isNotEmpty()) {
             val size = stack.size
             for (i in 1..size) {
                 val (x, y) = stack.pop()
 
-                if (canvas.isInBound(x, y) && canvas.getGrid(x, y) == EMPTY_GRID) {
+                if (canvas.isInBound(x, y) && canvas.getGrid(x, y) == initialColor) {
                     stack.push(Pair(x + 1, y))
                     stack.push(Pair(x - 1, y))
                     stack.push(Pair(x, y + 1))

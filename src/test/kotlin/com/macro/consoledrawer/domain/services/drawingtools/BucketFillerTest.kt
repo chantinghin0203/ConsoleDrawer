@@ -16,8 +16,8 @@ import org.springframework.test.context.ActiveProfiles
 @ActiveProfiles("test")
 internal class BucketFillerTest(@Autowired val bucketFiller: BucketFiller) {
 
-    private val expectedX = 3
-    private val expectedY = 5
+    private val expectedX = 4
+    private val expectedY = 4
     private val expectedC = "c"
     private val canvas: Canvas = createDummyCanvas(10, 10)
 
@@ -57,6 +57,13 @@ internal class BucketFillerTest(@Autowired val bucketFiller: BucketFiller) {
     }
 
     @Test
+    fun `validates with forbidden color x should return WrongUserInputException`() {
+        assertThrows(WrongUserInputException::class.java) {
+            bucketFiller.validates("${Command.L} $expectedX $expectedY x", canvas)
+        }
+    }
+
+    @Test
     fun `validates with zero x or y should return WrongUserInputException`() {
         assertThrows(WrongUserInputException::class.java) {
             bucketFiller.validates("${Command.L} 0 $expectedY $expectedC", canvas)
@@ -80,16 +87,100 @@ internal class BucketFillerTest(@Autowired val bucketFiller: BucketFiller) {
 
     @Test
     fun draws() {
-        val newCanvas = createDummyCanvas(10, 10)
+        val newCanvas = Canvas(
+                grids = arrayOf(
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', 'x', 'x', 'x', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', ' ', 'x', ' ', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', ' ', ' ', ' ', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', ' ', ' ', 'x', ' ', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', ' ', ' ', 'x', ' ', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', ' ', ' ', 'x', 'x', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', ' ', 'x', 'x', 'x', ' ', ' ', ' ')
+                )
+        )
+
+        val expectedCanvas = Canvas(
+                grids = arrayOf(
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', 'x', 'x', 'x', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', 'c', 'x', 'c', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', 'c', 'c', 'c', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', 'c', 'c', 'x', 'c', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', 'c', 'c', 'x', 'c', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', 'c', 'c', 'x', 'x', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', 'c', 'c', 'c', 'c', 'c', 'x', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', 'c', 'x', 'x', 'x', ' ', ' ', ' ')
+                )
+        )
+
 
         val matchResult = bucketFiller.validates("${Command.L} $expectedX $expectedY $expectedC", newCanvas)
 
         val actualCanvas = bucketFiller.draws(matchResult, newCanvas)
 
-        for (x in 1..actualCanvas.getWidth()) {
-            for (y in 1..actualCanvas.getHeight()) {
-                assertThat(actualCanvas.getGrid(x, y)).isEqualTo('c')
-            }
-        }
+        assertThat(actualCanvas).isEqualTo(expectedCanvas)
+    }
+
+    @Test
+    fun `draws fill two different color in one area`() {
+        val newCanvas = Canvas(
+                grids = arrayOf(
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', 'x', 'x', 'x', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', ' ', 'x', ' ', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', ' ', ' ', ' ', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', ' ', ' ', 'x', ' ', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', ' ', ' ', 'x', ' ', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', ' ', ' ', 'x', 'x', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', ' ', 'x', 'x', 'x', ' ', ' ', ' ')
+                )
+        )
+
+        val expectedCanvas = Canvas(
+                grids = arrayOf(
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', 'x', 'x', 'x', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', 'c', 'x', 'c', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', 'c', 'c', 'c', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', 'c', 'c', 'x', 'c', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', 'c', 'c', 'x', 'c', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', 'c', 'c', 'x', 'x', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', 'c', 'c', 'c', 'c', 'c', 'x', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', 'c', 'x', 'x', 'x', ' ', ' ', ' ')
+                )
+        )
+
+        val expectedCanvasDifferentColor = Canvas(
+                grids = arrayOf(
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', 'x', 'x', 'x', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', 'o', 'x', 'o', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', 'o', 'o', 'o', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', 'o', 'o', 'x', 'o', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', 'o', 'o', 'x', 'o', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', 'o', 'o', 'x', 'x', 'x', ' ', ' ', ' '),
+                        charArrayOf(' ', 'x', 'o', 'o', 'o', 'o', 'o', 'x', ' ', ' '),
+                        charArrayOf(' ', ' ', 'x', 'o', 'x', 'x', 'x', ' ', ' ', ' ')
+                )
+        )
+
+        val matchResult = bucketFiller.validates("${Command.L} $expectedX $expectedY $expectedC", newCanvas)
+
+        val actualCanvas = bucketFiller.draws(matchResult, newCanvas)
+
+        assertThat(actualCanvas).isEqualTo(expectedCanvas)
+
+        val matchResultDifferentColor = bucketFiller.validates("${Command.L} $expectedX $expectedY o", actualCanvas)
+        val actualCanvasDifferentColor = bucketFiller.draws(matchResultDifferentColor, actualCanvas)
+
+        assertThat(actualCanvasDifferentColor).isEqualTo(expectedCanvasDifferentColor)
     }
 }

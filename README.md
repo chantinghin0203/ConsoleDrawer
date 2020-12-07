@@ -33,11 +33,12 @@ In a nutshell, the program should work as follows:
 |Q|Should quit the program
 
 ## Validations and rejections:
-User must create canvas before creating Canvas must provide positive numbers
+1. User must create canvas before drawing
+2. User must provide positive width and height when creating canvas
+3. All out of bound coordinates will be rejected
+4. Drawing rectangle must at least has 1 width and 1 height (abs(x1 - x2) > 0 && abs(y1 - y2) > 0
+5. BucketFiller cannot fill with x
 
-All points with out of bound coordinate will be rejected
-
-Drawing rectandle must provide at least 1 width and 1 height (For example x1=1,y1=2,x2=1,y2=3 will be rejected - width is zero). Otherwise you should draw a line instead
 
 ## Limitations:
 Cannot draw diagonal lines
