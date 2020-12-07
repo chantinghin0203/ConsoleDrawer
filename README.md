@@ -14,6 +14,11 @@ A console application for drawing lines/rectangles and filling colors
   ```
   mvn exec:java
   ```
+  or
+  ```
+  java -jar target\consoledrawer-0.0.1-SNAPSHOT.jar
+   ```
+    
   
 __Description__
 
