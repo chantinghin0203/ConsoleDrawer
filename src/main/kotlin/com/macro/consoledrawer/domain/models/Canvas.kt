@@ -2,8 +2,6 @@ package com.macro.consoledrawer.domain.models
 
 data class Canvas(
         val grids: Array<CharArray> = emptyArray()
-
-
 ) {
     fun isInBound(x: Int, y: Int) = y > 0 && y <= getHeight() && x > 0 && x <= getWidth()
 
@@ -15,6 +13,15 @@ data class Canvas(
 
     fun setGrid(width: Int, height: Int, notation: Char = 'x') {
         grids[height - 1][width - 1] = notation
+    }
+
+    fun display() {
+        println("---".repeat(getWidth()))
+
+        for (row in grids) {
+            println("|${row.joinToString("  ")}|")
+        }
+        println("---".repeat(getWidth()))
     }
 
     override fun equals(other: Any?): Boolean {
@@ -35,14 +42,5 @@ data class Canvas(
 
     override fun hashCode(): Int {
         return grids.contentDeepHashCode()
-    }
-
-    fun display() {
-        println("---".repeat(getWidth()))
-
-        for (row in grids) {
-            println("|${row.joinToString("  ")}|")
-        }
-        println("---".repeat(getWidth()))
     }
 }

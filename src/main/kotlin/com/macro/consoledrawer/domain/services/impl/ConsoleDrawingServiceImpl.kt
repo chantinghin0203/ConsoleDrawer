@@ -12,7 +12,7 @@ class ConsoleDrawingServiceImpl(
 ) : DrawingService {
 
     override fun draws(userInput: String, canvas: Canvas): Canvas {
-        return drawingFactory.picks(Command.valueOf(userInput.first().toString()))
+        return drawingFactory.picks(Command.fromString(userInput.first().toString()))
                 .run {
                     val matchResult = validates(userInput, canvas)
                     return@run draws(matchResult, canvas)

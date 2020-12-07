@@ -27,7 +27,7 @@ class CanvasDrawer : DrawingTool(Command.C) {
     }
 
     override fun draws(matchResult: MatchResult, canvas: Canvas): Canvas {
-        return canvas.copy(
+        return Canvas(
                 grids = Array(
                         matchResult.groups[TAG_H]!!.value.toInt()
                 ) {

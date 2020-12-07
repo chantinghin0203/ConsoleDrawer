@@ -35,21 +35,22 @@ class LineDrawer : DrawingTool(Command.L) {
     }
 
     override fun draws(matchResult: MatchResult, canvas: Canvas): Canvas {
-        val (x1, y1, x2, y2) = matchResult.toCoordinate()
-
-        when {
-            x1 == x2 -> for (j in if (y2 > y1) y1..y2 else y2..y1) {
-                canvas.setGrid(x1, j)
-            }
-            y1 == y2 -> for (i in if (x2 > x1) x1..x2 else x2..x1) {
-                canvas.setGrid(i, y1)
-            }
-            else -> {
-                // TODO("Diagonal line is not supported")
-            }
+        return canvas.apply {
+            matchResult.toCoordinate()
+                    .let { (x1, y1, x2, y2) ->
+                        when {
+                            x1 == x2 -> for (j in if (y2 > y1) y1..y2 else y2..y1) {
+                                this.setGrid(x1, j)
+                            }
+                            y1 == y2 -> for (i in if (x2 > x1) x1..x2 else x2..x1) {
+                                this.setGrid(i, y1)
+                            }
+                            else -> {
+                                // TODO("Diagonal line is not supported")
+                            }
+                        }
+                    }
         }
-
-        return canvas
     }
 
     private fun MatchResult.toCoordinate() = listOf(
