@@ -20,8 +20,8 @@ class RectangleDrawer : DrawingTool(Command.R) {
 
                     if (!canvas.isInBound(x1, y1) || !canvas.isInBound(x2, y2))
                         throw WrongUserInputException("The width is out of range [maxHeight=${canvas.getHeight()}] [maxWidth=${canvas.getWidth()}]")
-                    if (x1 == x2 && y1 == y2)
-                        throw WrongUserInputException("Cannot create a rectangle with two same points [x1=$x1] [y1=$y1] [x2=$x2] [y2=$y2]")
+                    if (x1 == x2 || y1 == y2)
+                        throw WrongUserInputException("Cannot create a rectangle with zero height or width [x1=$x1] [y1=$y1] [x2=$x2] [y2=$y2]")
 
                 } ?: throw WrongUserInputException("Wrong parameters for drawing rectangle [$userInput]")
     }
@@ -29,7 +29,7 @@ class RectangleDrawer : DrawingTool(Command.R) {
     override fun draws(matchResult: MatchResult, canvas: Canvas): Canvas {
         val (x1, y1, x2, y2) = matchResult.toCoordinate()
 
-        for (i in if (x2 > x1) x1..x2 else y2..y1) {
+        for (i in if (x2 > x1) x1..x2 else x2..x1) {
             canvas.setGrid(i, y1)
             canvas.setGrid(i, y2)
         }

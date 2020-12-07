@@ -1,5 +1,6 @@
 package com.macro.consoledrawer.domain.services.drawingtools
 
+import CanvasHelper.Companion.createDummyCanvas
 import com.macro.consoledrawer.domain.models.Canvas
 import com.macro.consoledrawer.domain.models.Command
 import com.macro.consoledrawer.exception.CanvasNotCreatedException
@@ -18,9 +19,7 @@ internal class BucketFillerTest(@Autowired val bucketFiller: BucketFiller) {
     private val expectedX = 3
     private val expectedY = 5
     private val expectedC = "c"
-    private val canvas: Canvas = Canvas(
-            grids = Array(10) { CharArray(10) { ' ' } }
-    )
+    private val canvas: Canvas = createDummyCanvas(10, 10)
 
     @Test
     fun validates() {
@@ -81,13 +80,15 @@ internal class BucketFillerTest(@Autowired val bucketFiller: BucketFiller) {
 
     @Test
     fun draws() {
-        val matchResult = bucketFiller.validates("${Command.L} $expectedX $expectedY $expectedC", canvas)
+        val newCanvas = createDummyCanvas(10, 10)
 
-        val newCanvas = bucketFiller.draws(matchResult, canvas)
+        val matchResult = bucketFiller.validates("${Command.L} $expectedX $expectedY $expectedC", newCanvas)
 
-        for (x in 1..newCanvas.getWidth()) {
-            for (y in 1..newCanvas.getHeight()) {
-                assertThat(newCanvas.getGrid(x, y)).isEqualTo('c')
+        val actualCanvas = bucketFiller.draws(matchResult, newCanvas)
+
+        for (x in 1..actualCanvas.getWidth()) {
+            for (y in 1..actualCanvas.getHeight()) {
+                assertThat(actualCanvas.getGrid(x, y)).isEqualTo('c')
             }
         }
     }

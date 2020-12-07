@@ -1,5 +1,6 @@
 package com.macro.consoledrawer.domain.services.drawingtools
 
+import CanvasHelper.Companion.createDummyCanvas
 import com.macro.consoledrawer.domain.models.Canvas
 import com.macro.consoledrawer.domain.models.Command
 import com.macro.consoledrawer.exception.CanvasNotCreatedException
@@ -14,9 +15,7 @@ import org.springframework.test.context.ActiveProfiles
 @SpringBootTest
 @ActiveProfiles("test")
 internal class RectangleDrawerTest(@Autowired val rectangleDrawer: RectangleDrawer) {
-    private val canvas: Canvas = Canvas(
-            grids = Array(10) { CharArray(10) { ' ' } }
-    )
+    private val canvas: Canvas = createDummyCanvas(10, 10)
 
     private val expectedX1 = 5
     private val expectedY1 = 5
@@ -56,7 +55,7 @@ internal class RectangleDrawerTest(@Autowired val rectangleDrawer: RectangleDraw
     }
 
     @Test
-    fun `validates with zero height or width should throw WrongUserInputException`() {
+    fun `validates with point at zero should throw WrongUserInputException`() {
         assertThrows(WrongUserInputException::class.java) {
             rectangleDrawer.validates("${Command.R} 0 $expectedY1 $expectedX2 $expectedY2", canvas)
         }
@@ -74,6 +73,16 @@ internal class RectangleDrawerTest(@Autowired val rectangleDrawer: RectangleDraw
         }
     }
 
+    @Test
+    fun `validates with zero height or width should throw WrongUserInputException`() {
+        assertThrows(WrongUserInputException::class.java) {
+            rectangleDrawer.validates("${Command.R} 10 $expectedY1 10 $expectedY2", canvas)
+        }
+
+        assertThrows(WrongUserInputException::class.java) {
+            rectangleDrawer.validates("${Command.R} $expectedX1 10 $expectedX2 10", canvas)
+        }
+    }
 
     @Test
     fun `validates with out of bound height or width should throw WrongUserInputException`() {
@@ -95,7 +104,7 @@ internal class RectangleDrawerTest(@Autowired val rectangleDrawer: RectangleDraw
     }
 
     @Test
-    fun draws() {
+    fun `draws with one point at top left and one point at bottom right`() {
         val expectedCanvas = Canvas(
                 grids = arrayOf(
                         charArrayOf('x', 'x', 'x', 'x', 'x', ' ', ' ', ' ', ' ', ' '),
@@ -111,20 +120,50 @@ internal class RectangleDrawerTest(@Autowired val rectangleDrawer: RectangleDraw
                 )
         )
 
-        val matchResult = rectangleDrawer.validates("${Command.R} $expectedX1 $expectedY1 $expectedX2 $expectedY2", canvas)
+        val dummyCanvas = createDummyCanvas(10, 10)
 
-        val newCanvas = rectangleDrawer.draws(matchResult, canvas)
+        val matchResult = rectangleDrawer.validates("${Command.R} $expectedX1 $expectedY1 $expectedX2 $expectedY2", dummyCanvas)
+        val newDummyCanvas = rectangleDrawer.draws(matchResult, dummyCanvas)
+        assertThat(newDummyCanvas).isEqualTo(expectedCanvas)
 
-        for (i in expectedX1..expectedX2) {
-            assertThat(canvas.getGrid(i, expectedY1)).isEqualTo('x')
-            assertThat(canvas.getGrid(i, expectedY2)).isEqualTo('x')
-        }
+        // swap two points
+        val newDummyCanvasSwapped = createDummyCanvas(10, 10)
+        val matchResultSwapped = rectangleDrawer.validates("${Command.R} $expectedX2 $expectedY2 $expectedX1 $expectedY1", newDummyCanvasSwapped)
+        val newCanvasSwapped = rectangleDrawer.draws(matchResultSwapped, newDummyCanvasSwapped)
+        assertThat(newCanvasSwapped).isEqualTo(expectedCanvas)
+    }
 
-        for (j in expectedY1..expectedY2) {
-            assertThat(canvas.getGrid(expectedX1, j)).isEqualTo('x')
-            assertThat(canvas.getGrid(expectedX2, j)).isEqualTo('x')
-        }
+    @Test
+    fun `draws with one point at top right and one point at bottom left`() {
+        val expectedX1 = 5
+        val expectedY1 = 1
+        val expectedX2 = 1
+        val expectedY2 = 5
+        val expectedCanvas = Canvas(
+                grids = arrayOf(
+                        charArrayOf('x', 'x', 'x', 'x', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf('x', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf('x', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf('x', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf('x', 'x', 'x', 'x', 'x', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+                        charArrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ')
+                )
+        )
 
-        assertThat(newCanvas).isEqualTo(expectedCanvas)
+        val dummyCanvas = createDummyCanvas(10, 10)
+
+        val matchResult = rectangleDrawer.validates("${Command.R} $expectedX1 $expectedY1 $expectedX2 $expectedY2", dummyCanvas)
+        val newDummyCanvas = rectangleDrawer.draws(matchResult, dummyCanvas)
+        assertThat(newDummyCanvas).isEqualTo(expectedCanvas)
+
+        // swap two points
+        val newDummyCanvasSwapped = createDummyCanvas(10, 10)
+        val matchResultSwapped = rectangleDrawer.validates("${Command.R} $expectedX2 $expectedY2 $expectedX1 $expectedY1", newDummyCanvasSwapped)
+        val newCanvasSwapped = rectangleDrawer.draws(matchResultSwapped, newDummyCanvasSwapped)
+        assertThat(newCanvasSwapped).isEqualTo(expectedCanvas)
     }
 }

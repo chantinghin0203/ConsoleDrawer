@@ -1,0 +1,409 @@
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x     x  x  x  x  x                          x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x     x  x  x  x  x                          x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x     x  x  x  x  x                          x      |
+|      x     x           x                          x      |
+|      x     x           x                          x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x     x  x  x  x  x                          x      |
+|      x     x           x                          x      |
+|      x     x     x  x  x                          x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x     x  x  x  x  x                          x      |
+|      x     x           x                          x      |
+|      x     x     x  x  x                          x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x     x  x  x  x  x                          x      |
+|      x     x           x                          x      |
+|      x     x     x  x  x                          x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x  x  x                          x      |
+|      x     x                                      x      |
+|      x     x                                      x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x     x  x  x  x  x                          x      |
+|      x     x           x                          x      |
+|      x     x     x  x  x                          x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x  x  x                          x      |
+|      x     x           x                          x      |
+|      x     x           x                          x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x     x  x  x  x  x                          x      |
+|      x     x           x                          x      |
+|      x     x     x  x  x                          x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x  x  x                          x      |
+|      x     x           x                          x      |
+|      x     x  x  x  x  x                          x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x     x  x  x  x  x        x  x  x  x  x     x      |
+|      x     x           x        x  x  x  x  x     x      |
+|      x     x     x  x  x                          x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x  x  x                          x      |
+|      x     x           x                          x      |
+|      x     x  x  x  x  x                          x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x     x  x  x  x  x        x  x  x  x  x     x      |
+|      x     x           x        x  x  x  x  x     x      |
+|      x     x     x  x  x        x                 x      |
+|      x     x     x              x                 x      |
+|      x     x     x              x                 x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x  x  x                          x      |
+|      x     x           x                          x      |
+|      x     x  x  x  x  x                          x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x     x  x  x  x  x        x  x  x  x  x     x      |
+|      x     x           x        x  x  x  x  x     x      |
+|      x     x     x  x  x        x                 x      |
+|      x     x     x              x                 x      |
+|      x     x     x              x                 x      |
+|      x     x     x              x  x  x  x  x     x      |
+|      x     x     x              x  x  x  x  x     x      |
+|      x     x     x                                x      |
+|      x     x     x                                x      |
+|      x     x     x  x  x                          x      |
+|      x     x           x                          x      |
+|      x     x  x  x  x  x                          x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x     x  x  x  x  x        x  x  x  x  x     x      |
+|      x     x           x        x  x  x  x  x     x      |
+|      x     x     x  x  x        x                 x      |
+|      x     x     x              x                 x      |
+|      x     x     x              x                 x      |
+|      x     x     x              x  x  x  x  x     x      |
+|      x     x     x              x  x  x  x  x     x      |
+|      x     x     x                          x     x      |
+|      x     x     x                          x     x      |
+|      x     x     x  x  x                    x     x      |
+|      x     x           x                          x      |
+|      x     x  x  x  x  x                          x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x     x  x  x  x  x        x  x  x  x  x     x      |
+|      x     x           x        x  x  x  x  x     x      |
+|      x     x     x  x  x        x                 x      |
+|      x     x     x              x                 x      |
+|      x     x     x              x                 x      |
+|      x     x     x              x  x  x  x  x     x      |
+|      x     x     x              x  x  x  x  x     x      |
+|      x     x     x                          x     x      |
+|      x     x     x                          x     x      |
+|      x     x     x  x  x                    x     x      |
+|      x     x           x        x  x  x  x  x     x      |
+|      x     x  x  x  x  x        x  x  x  x  x     x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|                                                          |
+|                                                          |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|      x                                            x      |
+|      x     x  x  x  x  x        x  x  x  x  x     x      |
+|      x     x  o  o  o  x        x  x  x  x  x     x      |
+|      x     x  o  x  x  x        x                 x      |
+|      x     x  o  x              x                 x      |
+|      x     x  o  x              x                 x      |
+|      x     x  o  x              x  x  x  x  x     x      |
+|      x     x  o  x              x  x  x  x  x     x      |
+|      x     x  o  x                          x     x      |
+|      x     x  o  x                          x     x      |
+|      x     x  o  x  x  x                    x     x      |
+|      x     x  o  o  o  x        x  x  x  x  x     x      |
+|      x     x  x  x  x  x        x  x  x  x  x     x      |
+|      x                                            x      |
+|      x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x      |
+|                                                          |
+|                                                          |
+------------------------------------------------------------
+enter command:
+
+------------------------------------------------------------
+|a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a|
+|a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a|
+|a  a  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  a  a|
+|a  a  x                                            x  a  a|
+|a  a  x     x  x  x  x  x        x  x  x  x  x     x  a  a|
+|a  a  x     x  o  o  o  x        x  x  x  x  x     x  a  a|
+|a  a  x     x  o  x  x  x        x                 x  a  a|
+|a  a  x     x  o  x              x                 x  a  a|
+|a  a  x     x  o  x              x                 x  a  a|
+|a  a  x     x  o  x              x  x  x  x  x     x  a  a|
+|a  a  x     x  o  x              x  x  x  x  x     x  a  a|
+|a  a  x     x  o  x                          x     x  a  a|
+|a  a  x     x  o  x                          x     x  a  a|
+|a  a  x     x  o  x  x  x                    x     x  a  a|
+|a  a  x     x  o  o  o  x        x  x  x  x  x     x  a  a|
+|a  a  x     x  x  x  x  x        x  x  x  x  x     x  a  a|
+|a  a  x                                            x  a  a|
+|a  a  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x  a  a|
+|a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a|
+|a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a  a|
+------------------------------------------------------------
+enter command:

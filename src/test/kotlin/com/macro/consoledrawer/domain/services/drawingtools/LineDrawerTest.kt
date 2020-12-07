@@ -1,5 +1,6 @@
 package com.macro.consoledrawer.domain.services.drawingtools
 
+import CanvasHelper.Companion.createDummyCanvas
 import com.macro.consoledrawer.domain.models.Canvas
 import com.macro.consoledrawer.domain.models.Command
 import com.macro.consoledrawer.exception.CanvasNotCreatedException
@@ -17,9 +18,7 @@ import org.springframework.test.context.ActiveProfiles
 @ActiveProfiles("test")
 internal class LineDrawerTest(@Autowired val lineDrawer: LineDrawer) {
 
-    private val canvas: Canvas = Canvas(
-            grids = Array(10) { CharArray(10) { ' ' } }
-    )
+    private val canvas: Canvas = createDummyCanvas(10, 10)
 
     @Nested
     inner class VerticalLine {
@@ -99,16 +98,20 @@ internal class LineDrawerTest(@Autowired val lineDrawer: LineDrawer) {
 
         @Test
         fun draws() {
-            val matchResult = lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 $expectedX2 $expectedY2", canvas)
-            val actualCanvas = lineDrawer.draws(matchResult, canvas)
+            val newCanvas = createDummyCanvas(10, 10)
+
+            val matchResult = lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 $expectedX2 $expectedY2", newCanvas)
+            val actualCanvas = lineDrawer.draws(matchResult, newCanvas)
 
             assertThat(actualCanvas).isEqualTo(expectedCanvas)
         }
 
         @Test
         fun `draws with y1 is greater than y2`() {
-            val matchResult = lineDrawer.validates("${Command.L} $expectedX1 $expectedY2 $expectedX2 $expectedY1", canvas)
-            val actualCanvas = lineDrawer.draws(matchResult, canvas)
+            val newCanvas = createDummyCanvas(10, 10)
+
+            val matchResult = lineDrawer.validates("${Command.L} $expectedX1 $expectedY2 $expectedX2 $expectedY1", newCanvas)
+            val actualCanvas = lineDrawer.draws(matchResult, newCanvas)
 
             assertThat(actualCanvas).isEqualTo(expectedCanvas)
 
@@ -185,16 +188,20 @@ internal class LineDrawerTest(@Autowired val lineDrawer: LineDrawer) {
 
         @Test
         fun draws() {
-            val matchResult = lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 $expectedX2 $expectedY2", canvas)
-            val actualCanvas = lineDrawer.draws(matchResult, canvas)
+            val newCanvas = createDummyCanvas(10, 10)
+            val matchResult = lineDrawer.validates("${Command.L} $expectedX1 $expectedY1 $expectedX2 $expectedY2", newCanvas)
+
+            val actualCanvas = lineDrawer.draws(matchResult, newCanvas)
 
             assertThat(actualCanvas).isEqualTo(expectedCanvas)
         }
 
         @Test
         fun `draws with x1 is greater than x2`() {
-            val matchResult = lineDrawer.validates("${Command.L} $expectedX2 $expectedY1 $expectedX1 $expectedY2", canvas)
-            val actualCanvas = lineDrawer.draws(matchResult, canvas)
+            val newCanvas = createDummyCanvas(10, 10)
+
+            val matchResult = lineDrawer.validates("${Command.L} $expectedX2 $expectedY1 $expectedX1 $expectedY2", newCanvas)
+            val actualCanvas = lineDrawer.draws(matchResult, newCanvas)
 
             assertThat(actualCanvas).isEqualTo(expectedCanvas)
         }

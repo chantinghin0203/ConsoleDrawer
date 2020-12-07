@@ -1,5 +1,6 @@
 package com.macro.consoledrawer.domain.services.drawingtools
 
+import CanvasHelper.Companion.createDummyCanvas
 import com.macro.consoledrawer.domain.models.Canvas
 import com.macro.consoledrawer.domain.models.Command
 import com.macro.consoledrawer.exception.WrongUserInputException
@@ -16,9 +17,7 @@ internal class CanvasDrawerTest(@Autowired val canvasDrawer: CanvasDrawer) {
     private val expectedW = 10
     private val expectedH = 5
 
-    private val canvas: Canvas = Canvas(
-            grids = Array(5) { CharArray(5) { ' ' } }
-    )
+    private val canvas: Canvas = createDummyCanvas(5, 5)
 
     private val expectedCanvas = Canvas(
             grids = arrayOf(
